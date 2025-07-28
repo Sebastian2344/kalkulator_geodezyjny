@@ -43,9 +43,11 @@ dependencies:
   isar: ^3.1.0+1
   isar_flutter_libs: ^3.1.0+1
   path_provider: ^2.1.2
-  analyzer: 5.13.0
   equatable: ^2.0.5
+  mocktail: ^1.0.4
+  bloc_test: ^10.0.0
 dev_dependencies:
+
   flutter_test:
     sdk: flutter
 
@@ -58,7 +60,7 @@ dev_dependencies:
   injectable_generator:  
   # add build runner if not already added  
   build_runner: ^2.4.8
-  isar_generator: ^3.1.0+1
+  #isar_generator: ^3.1.0+1
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
