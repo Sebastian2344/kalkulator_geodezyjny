@@ -7,6 +7,7 @@ import 'package:bloc_test/bloc_test.dart';
 
 
 class MockSaveOrtogonalnaService extends Mock implements SaveOrtogonalnaService {}
+class MockSaveOrtogonalna extends Mock implements SaveOrtogonalna {}
 
 void main() {
   late MockSaveOrtogonalnaService mockService;
@@ -15,6 +16,10 @@ void main() {
   setUp(() {
     mockService = MockSaveOrtogonalnaService();
     cubit = HistoryOrtogonalnaCubit(mockService);
+  });
+
+  setUpAll(() {
+    registerFallbackValue(MockSaveOrtogonalna());
   });
 
   group('HistoryOrtogonalnaCubit', () {
@@ -30,6 +35,7 @@ void main() {
       build: () => cubit,
       act: (cubit) => cubit.getFromDb(),
       expect: () => [isA<IGotIt>()],
+      verify: (_) => verify(() => mockService.getData()).called(1),
     );
 
     blocTest<HistoryOrtogonalnaCubit, HistoryOrtogonalnaState>(

@@ -111,18 +111,19 @@ class OrtogonalnaHistory extends StatelessWidget {
               );
             },
           );
-        } else {
+        } else if(state is HistoryOrtogonalnaError)  {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('Error'),
+              Text(state.error),
               ElevatedButton(onPressed: (){
                 context.read<HistoryOrtogonalnaCubit>().resetState();
               }, child: const Text('Spróbuj ponownie'))
             ],
           );
         }
+        return const SizedBox.shrink();
       }),
     );
   }

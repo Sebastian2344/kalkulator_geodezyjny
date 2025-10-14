@@ -22,7 +22,7 @@ class WciecieLinioweHistory extends StatelessWidget {
               onPressed: () async {
                 context.read<WciecieLinioweCubit>().resetState();
                 await context.read<CrudWciecieLinioweCubit>().closeDB();
-                Navigation.router.pushReplacement('/linia');
+                Navigation.router.go('/linia');
               },
               icon: const Icon(Icons.arrow_back))
         ],

@@ -51,7 +51,7 @@ class SaveAlertDialogWL extends StatelessWidget {
                               await save.openDB();
                               await save.getData();
                               Navigation.router
-                                  .pushReplacement('/history_liniowe');
+                                  .go('/history_liniowe');
                             },
                             child: const Text("Do Zapisów")),
                       ],
@@ -77,7 +77,7 @@ class SaveAlertDialogWL extends StatelessWidget {
                         onPressed: () async {
                           await save.openDB();
                           await save.getData();
-                          Navigation.router.pushReplacement('/history_liniowe');
+                          Navigation.router.go('/history_liniowe');
                         },
                         child: const Text('Do zapisów'))
                   ],

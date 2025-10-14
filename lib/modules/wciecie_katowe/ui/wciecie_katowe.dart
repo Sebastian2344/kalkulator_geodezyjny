@@ -29,7 +29,7 @@ class _WciecieKatoweState extends State<WciecieKatowe> {
         leading: IconButton(
           onPressed: () {
             context.read<WciecieKatoweCubit>().resetState();
-            Navigation.router.pushReplacement('/');
+            Navigation.router.go('/');
           },
           icon: const Icon(Icons.arrow_back),
         ),

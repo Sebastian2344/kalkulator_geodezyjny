@@ -43,6 +43,7 @@ void main() {
     },
     act: (cubit) => cubit.openDB(),
     expect: () => [isA<HistoryBiegunowaInitial>()],
+    verify: (_) => verify(() => mockService.openDB()).called(1),
   );
 
   blocTest<HistoryBiegunowaCubit, HistoryBiegunowaState>(
@@ -56,5 +57,6 @@ void main() {
     expect: () => [
       isA<IGotIt>().having((s) => s.lista.map((e) => e.id).toList(), 'ids', [1])
     ],
+    verify: (_) => verify(() => mockService.getData()).called(1),
   );
 }

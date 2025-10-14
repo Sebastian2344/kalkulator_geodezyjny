@@ -22,7 +22,7 @@ class WciecieKatoweHistory extends StatelessWidget {
               onPressed: () async {
                 context.read<WciecieKatoweCubit>().resetState();
                 await context.read<HistoryWciecieKatoweCubit>().closeDB();
-                Navigation.router.pushReplacement('/kat');
+                Navigation.router.go('/kat');
               },
               icon: const Icon(Icons.arrow_back))
         ],

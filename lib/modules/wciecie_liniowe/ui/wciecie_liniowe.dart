@@ -39,7 +39,7 @@ class _WciecieLinioweState extends State<WciecieLiniowe> {
         leading: IconButton(
           onPressed: () {
             context.read<WciecieLinioweCubit>().resetState();
-            Navigation.router.pushReplacement('/');
+            Navigation.router.go('/');
           },
           icon: const Icon(Icons.arrow_back),
         ),

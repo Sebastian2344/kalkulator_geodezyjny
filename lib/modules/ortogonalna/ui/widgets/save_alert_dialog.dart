@@ -51,7 +51,7 @@ class SaveAlertDialogO extends StatelessWidget {
                               await save.openDB();
                               await save.getFromDb();
                               Navigation.router
-                                  .pushReplacement('/history_ortogonalna');
+                                  .go('/history_ortogonalna');
                             },
                             child: const Text("Do Zapisów")),
                       ],

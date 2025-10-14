@@ -51,7 +51,7 @@ class SaveAlertDialogWK extends StatelessWidget {
                               await save.openDB();
                               await save.getData();
                               Navigation.router
-                                  .pushReplacement('/history_katowe');
+                                  .go('/history_katowe');
                             },
                             child: const Text("Do Zapisów")),
                       ],
