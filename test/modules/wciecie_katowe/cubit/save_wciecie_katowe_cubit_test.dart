@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kalkulator_geodezyjny_new_version/modules/wciecie_katowe/cubit/save_wcecie_katowe_cubit.dart';
+import 'package:kalkulator_geodezyjny_new_version/modules/wciecie_katowe/data/model/save_wciecie_katowe.dart';
 import 'package:kalkulator_geodezyjny_new_version/modules/wciecie_katowe/data/model/wciece_katowe_model.dart';
 import 'package:kalkulator_geodezyjny_new_version/modules/wciecie_katowe/data/repository/save_repo.dart';
 import 'package:mocktail/mocktail.dart';
@@ -43,11 +44,11 @@ void main() {
 
   blocTest('get data succes',
       build: () { 
-        when(() => repo.getData()).thenAnswer((_) async => []);
+        when(() => repo.getData()).thenAnswer((_) async => [WciecieKatoweSave('nazwa', WciecieKatoweModel())]);
         return cubit;
       },
       act: (cubit) => cubit.getData(),
-      expect: () => [HistoryWciecieKatoweGetSuccesful([])],
+      expect: () => [isA<HistoryWciecieKatoweGetSuccesful>().having((e)=> e.saveList, 'savelist', isA<List<WciecieKatoweSave>>())],
       verify: (cubit) {
         verify(() => repo.getData()).called(1);
       });

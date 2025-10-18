@@ -34,7 +34,7 @@ void main() {
       },
       build: () => cubit,
       act: (cubit) => cubit.getFromDb(),
-      expect: () => [isA<IGotIt>()],
+      expect: () => [isA<IGotIt>().having((e)=> e.lista, 'lista savów', isA<List<SaveOrtogonalna>>())],
       verify: (_) => verify(() => mockService.getData()).called(1),
     );
 

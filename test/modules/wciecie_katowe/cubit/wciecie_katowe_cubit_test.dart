@@ -23,7 +23,7 @@ void main() {
       },
       act: (cubit) => cubit.oblicz('1', '1', '1', '1', '45', '45'),
       expect: () {
-        return [isA<WciecieKatoweSuccesful>()];
+        return [isA<WciecieKatoweSuccesful>().having((e)=> e.wciecieKatoweModel, 'model', isA<WciecieKatoweModel>())];
       },
       verify: (cubit) {
         verify(() => repo.oblicz('1', '1', '1', '1', '45', '45')).called(1);

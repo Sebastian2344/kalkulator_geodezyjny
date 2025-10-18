@@ -42,6 +42,10 @@ void main() {
       act: (cubit) => cubit.wynikOrtogonalnej('1', '2', '3', '4', '5', '6'),
       expect: () => [
         isA<OrtogonalnaSuccesful>()
+        .having((e)=> e.azymut, 'azymut', 9.0)
+        .having((e)=> e.przyrosty, 'przyrosty', [10.0, 11.0, 12.0])
+        .having((e)=> e.wynik, 'wyniki', [7.0, 8.0, 9.0])
+        .having((e)=> e.dane, 'lista danych', [1.0, 2.0, 3.0, 4.0, 5.0, 6.0])
       ],
     );
 
