@@ -16,7 +16,7 @@ void main() {
     mockCubit = MockWciecieLinioweCubit();
   });
 
-  Widget _buildTestableWidget() {
+  Widget buildTestableWidget() {
     return MaterialApp(
       home: BlocProvider<WciecieLinioweCubit>.value(
         value: mockCubit,
@@ -30,7 +30,7 @@ void main() {
     when(() => mockCubit.state).thenReturn(WciecieLinioweInitial());
     when(() => mockCubit.stream).thenAnswer((_)=> Stream.empty());
 
-    await tester.pumpWidget(_buildTestableWidget());
+    await tester.pumpWidget(buildTestableWidget());
 
     // Sprawdź, czy pola istnieją
     expect(find.byType(TextField), findsNWidgets(7));
@@ -45,7 +45,7 @@ void main() {
     when(() => mockCubit.oblicz(any(), any(), any(), any(), any(), any(), any()))
         .thenAnswer((_) async {});
 
-    await tester.pumpWidget(_buildTestableWidget());
+    await tester.pumpWidget(buildTestableWidget());
 
     await tester.enterText(find.byType(TextField).at(0), '100');
     await tester.enterText(find.byType(TextField).at(1), '200');
@@ -70,7 +70,7 @@ void main() {
     when(() => mockCubit.state)
         .thenReturn(WciecieLinioweSuccessful(mockModel));
 
-    await tester.pumpWidget(_buildTestableWidget());
+    await tester.pumpWidget(buildTestableWidget());
     await tester.pumpAndSettle();
 
     expect(find.text('120.0'), findsOneWidget);
@@ -84,7 +84,7 @@ void main() {
     when(() => mockCubit.state).thenReturn(WciecieLinioweError(''));
     when(() => mockCubit.stream).thenAnswer((_)=> Stream.empty());
     
-    await tester.pumpWidget(_buildTestableWidget());
+    await tester.pumpWidget(buildTestableWidget());
     await tester.pumpAndSettle();
 
     expect(

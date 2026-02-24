@@ -16,7 +16,7 @@ void main() {
     mockCubit = MockWciecieKatoweCubit();
   });
 
-  Widget _buildTestableWidget() {
+  Widget buildTestableWidget() {
     return MaterialApp(
       home: BlocProvider<WciecieKatoweCubit>.value(
         value: mockCubit,
@@ -30,7 +30,7 @@ void main() {
       when(() => mockCubit.state).thenReturn(WciecieKatoweInitial());
       when(() => mockCubit.stream).thenAnswer((_)=> Stream.empty());
 
-      await tester.pumpWidget(_buildTestableWidget());
+      await tester.pumpWidget(buildTestableWidget());
 
       // 7 pól tekstowych + 1 przycisk + tytuł
       expect(find.byType(TextField), findsNWidgets(6));
@@ -43,7 +43,7 @@ void main() {
       when(() => mockCubit.stream).thenAnswer((_)=> Stream.empty());
       when(() => mockCubit.oblicz(any(), any(), any(), any(), any(), any())).thenAnswer((_) async {});
 
-      await tester.pumpWidget(_buildTestableWidget());
+      await tester.pumpWidget(buildTestableWidget());
 
       await tester.enterText(find.byType(TextField).at(0), '100');
       await tester.enterText(find.byType(TextField).at(1), '200');
@@ -66,7 +66,7 @@ void main() {
           .thenReturn(WciecieKatoweSuccesful(mockModel));
       when(() => mockCubit.stream).thenAnswer((_)=> Stream.empty());
 
-      await tester.pumpWidget(_buildTestableWidget());
+      await tester.pumpWidget(buildTestableWidget());
       await tester.pumpAndSettle();
 
       expect(find.text('123.45'), findsOneWidget);
@@ -79,7 +79,7 @@ void main() {
       when(() => mockCubit.state).thenReturn(WciecieKatoweError(''));
       when(() => mockCubit.stream).thenAnswer((_)=> Stream.empty());
 
-      await tester.pumpWidget(_buildTestableWidget());
+      await tester.pumpWidget(buildTestableWidget());
       await tester.pumpAndSettle();
 
       expect(
@@ -93,7 +93,7 @@ void main() {
       when(() => mockCubit.stream).thenAnswer((_)=> Stream.empty());
       when(() => mockCubit.resetState()).thenReturn(null);
 
-      await tester.pumpWidget(_buildTestableWidget());
+      await tester.pumpWidget(buildTestableWidget());
       await tester.pumpAndSettle();
 
       await tester.tap(find.byIcon(Icons.arrow_back));

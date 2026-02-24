@@ -8,6 +8,7 @@ import 'package:kalkulator_geodezyjny_new_version/modules/ortogonalna/ui/screen/
 import 'package:mocktail/mocktail.dart';
 
 class MockOrtogonalnaHistory extends Mock implements HistoryOrtogonalnaCubit {}
+
 class MockOrtogonalnaCubit extends Mock implements OrtogonalnaCubit {}
 
 void main() {
@@ -22,21 +23,28 @@ void main() {
         .thenAnswer((_) => const Stream.empty());
   });
   testWidgets('initial state view', (tester) async {
-    BlocProvider.value(
+    await tester.pumpWidget(BlocProvider<HistoryOrtogonalnaCubit>.value(
         value: mockOrtogonalnaHistory,
-        child: MaterialApp(home: OrtogonalnaHistory()));
+        child: MaterialApp(home: OrtogonalnaHistory())));
 
-    await tester.pumpAndSettle();
+    await tester.pump();
+
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
   testWidgets('succes state view', (tester) async {
-    when(() => mockOrtogonalnaHistory.state)
-        .thenReturn(IGotIt([SaveOrtogonalna()..id = 1..azymut=1..dane=[1,2,3,4,5,6]..przyrosty=[1,2]..wyniki=[3,4]]));
+    when(() => mockOrtogonalnaHistory.state).thenReturn(IGotIt([
+      SaveOrtogonalna()
+        ..id = 1
+        ..azymut = 1
+        ..dane = [1, 2, 3, 4, 5, 6]
+        ..przyrosty = [1, 2]
+        ..wyniki = [3, 4]
+    ]));
     await tester.pumpWidget(BlocProvider<HistoryOrtogonalnaCubit>.value(
         value: mockOrtogonalnaHistory,
         child: MaterialApp(home: OrtogonalnaHistory())));
-    await tester.pumpAndSettle();
+    await tester.pump();
     expect(find.byType(ListView), findsOneWidget);
     expect(find.byType(ListTile), findsOneWidget);
     expect(find.text('Historia obliczeń'), findsOneWidget);
@@ -54,34 +62,38 @@ void main() {
     await tester.pumpWidget(BlocProvider<HistoryOrtogonalnaCubit>.value(
         value: mockOrtogonalnaHistory,
         child: MaterialApp(home: OrtogonalnaHistory())));
-    await tester.pumpAndSettle();
+    await tester.pump();
     expect(find.text('Error'), findsOneWidget);
     expect(find.byType(ElevatedButton), findsOneWidget);
   });
 
-  testWidgets('reset state and close db when user click button in appbar', (tester) async {
-    when(() => mockOrtogonalnaCubit.state,).thenReturn(OrtogonalnaInitial());
-    when(() => mockOrtogonalnaHistory.state,).thenReturn(IGotIt([]));
-    when(() => mockOrtogonalnaCubit.stream,).thenAnswer((_)=> Stream.empty());
-    when(() => mockOrtogonalnaHistory.closeDB())
-        .thenAnswer((_) async => {});
-    when(() => mockOrtogonalnaCubit.resetState())
-        .thenReturn(null);
+  testWidgets('reset state and close db when user click button in appbar',
+      (tester) async {
+    when(
+      () => mockOrtogonalnaCubit.state,
+    ).thenReturn(OrtogonalnaInitial());
+    when(
+      () => mockOrtogonalnaHistory.state,
+    ).thenReturn(IGotIt([]));
+    when(
+      () => mockOrtogonalnaCubit.stream,
+    ).thenAnswer((_) => Stream.empty());
+    when(() => mockOrtogonalnaHistory.closeDB()).thenAnswer((_) async => {});
+    when(() => mockOrtogonalnaCubit.resetState()).thenReturn(null);
 
     await tester.pumpWidget(MaterialApp(
       home: MultiBlocProvider(providers: [
         BlocProvider<HistoryOrtogonalnaCubit>.value(
-          value: mockOrtogonalnaHistory),
-          BlocProvider<OrtogonalnaCubit>.value(
-          value: mockOrtogonalnaCubit)
-      ],child:OrtogonalnaHistory()),
+            value: mockOrtogonalnaHistory),
+        BlocProvider<OrtogonalnaCubit>.value(value: mockOrtogonalnaCubit)
+      ], child: OrtogonalnaHistory()),
     ));
-    await tester.pumpAndSettle();
-    
-    await tester.tap(find.byIcon(Icons.arrow_back));
-    await tester.pumpAndSettle();
+    await tester.pump();
 
-    verify(()=>mockOrtogonalnaCubit.resetState()).called(1);
-    verify(()=>mockOrtogonalnaHistory.closeDB()).called(1);
+    await tester.tap(find.byIcon(Icons.arrow_back));
+    await tester.pump();
+
+    verify(() => mockOrtogonalnaCubit.resetState()).called(1);
+    verify(() => mockOrtogonalnaHistory.closeDB()).called(1);
   });
 }

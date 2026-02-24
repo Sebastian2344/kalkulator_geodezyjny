@@ -22,9 +22,31 @@ class ObliczeniaWcieceKatowe{
     const parser = ExpressionParser();
     double temp = parser.evaluate('($xA - $xp) * ($yB - $yp) - ($yA - $yp) * ($xB - $xp)');
     double mianownik = parser.evaluate('($xA - $xp) * ($xB - $xp) + ($yA - $yp) * ($yB - $yp)');
-    double atan = parser.evaluate('1 / tan($temp / $mianownik )');
-    double kontrola = parser.evaluate(' $atan * 200 / pi');
-    return double.parse(kontrola.toStringAsFixed(4));
+    double atan = parser.evaluate('abs(atan($temp / $mianownik))');
+    double czwartak = parser.evaluate(' $atan * 200 / pi');
+    double controlAngle = 0;
+    if(temp > 0 && mianownik > 0){
+      controlAngle = czwartak;
+    }else if(temp < 0 && mianownik > 0){
+      controlAngle = parser.evaluate('400 - $czwartak');
+    }else if(temp > 0 && mianownik < 0){
+      controlAngle = parser.evaluate('200 - $czwartak');
+    }else if(temp < 0 && mianownik < 0){
+      controlAngle = parser.evaluate('200 + $czwartak');
+    }else if(temp == 0 && mianownik < 0){
+      controlAngle = parser.evaluate('200');
+    }else if(temp == 0 && mianownik > 0){
+      controlAngle = parser.evaluate('0');
+    }else if(temp > 0 && mianownik == 0){
+      controlAngle = parser.evaluate('100');
+    }else if(temp < 0 && mianownik == 0){
+      controlAngle = parser.evaluate('300');
+    }else if(temp == 0 && mianownik == 0){
+      controlAngle = parser.evaluate('0');
+    }else if(temp > 0 && mianownik == 0){
+      controlAngle = parser.evaluate('100');
+    } 
+    return double.parse(controlAngle.toStringAsFixed(4));
   }
 
   double angle(double alfaAngle,double betaAngle){

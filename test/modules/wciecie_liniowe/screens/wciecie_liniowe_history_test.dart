@@ -23,7 +23,7 @@ void main() {
     mockWLcubit = MockWciecieLinioweCubit();
   });
 
-  Widget _buildTestable(Widget widget) {
+  Widget buildTestable(Widget widget) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<CrudWciecieLinioweCubit>.value(value: mockCrudCubit),
@@ -38,7 +38,7 @@ void main() {
       when(() => mockCrudCubit.state).thenReturn(CrudWciecieLinioweInitial());
       when(() => mockCrudCubit.stream).thenAnswer((_)=> Stream.empty());
 
-      await tester.pumpWidget(_buildTestable(const WciecieLinioweHistory()));
+      await tester.pumpWidget(buildTestable(const WciecieLinioweHistory()));
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
@@ -48,7 +48,7 @@ void main() {
           .thenReturn(CrudWciecieLinioweGetError('Błąd bazy danych'));
       when(() => mockCrudCubit.stream).thenAnswer((_)=> Stream.empty());
 
-      await tester.pumpWidget(_buildTestable(const WciecieLinioweHistory()));
+      await tester.pumpWidget(buildTestable(const WciecieLinioweHistory()));
       await tester.pumpAndSettle();
 
       expect(find.text('Błąd bazy danych'), findsOneWidget);
@@ -87,7 +87,7 @@ void main() {
         CrudWciecieLinioweGetSuccessful([mockSaveModel]),
       );
 
-      await tester.pumpWidget(_buildTestable(const WciecieLinioweHistory()));
+      await tester.pumpWidget(buildTestable(const WciecieLinioweHistory()));
       await tester.pumpAndSettle();
 
       expect(find.text('Pomiar 1'), findsOneWidget);
@@ -114,7 +114,7 @@ void main() {
       );
       when(() => mockCrudCubit.deleteData(any())).thenAnswer((_) async {});
 
-      await tester.pumpWidget(_buildTestable(const WciecieLinioweHistory()));
+      await tester.pumpWidget(buildTestable(const WciecieLinioweHistory()));
       await tester.pumpAndSettle();
 
       await tester.drag(find.text('Pomiar test'), const Offset(-500, 0));
@@ -130,7 +130,7 @@ void main() {
       when(() => mockWLcubit.resetState()).thenReturn(null);
       when(() => mockCrudCubit.closeDB()).thenAnswer((_) async {});
 
-      await tester.pumpWidget(_buildTestable(const WciecieLinioweHistory()));
+      await tester.pumpWidget(buildTestable(const WciecieLinioweHistory()));
       await tester.pumpAndSettle();
 
       await tester.tap(find.byIcon(Icons.arrow_back));

@@ -28,7 +28,7 @@ void main() {
     ).thenAnswer((_) => Stream.empty());
   });
 
-  Widget _buildTestableWidget() {
+  Widget buildTestableWidget() {
     return MaterialApp(
       home: MultiBlocProvider(
         providers: [
@@ -48,7 +48,7 @@ void main() {
       when(() => mockHistoryCubit.state)
           .thenReturn(HistoryWciecieKatoweInitial());
 
-      await tester.pumpWidget(_buildTestableWidget());
+      await tester.pumpWidget(buildTestableWidget());
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
@@ -76,7 +76,7 @@ void main() {
       when(() => mockHistoryCubit.state)
           .thenReturn(HistoryWciecieKatoweGetSuccesful(mockSaveList));
 
-      await tester.pumpWidget(_buildTestableWidget());
+      await tester.pumpWidget(buildTestableWidget());
       await tester.pumpAndSettle();
 
       expect(find.text('Historia obliczeń'), findsOneWidget);
@@ -108,7 +108,7 @@ void main() {
           .thenReturn(HistoryWciecieKatoweGetSuccesful(mockSaveList));
       when(() => mockHistoryCubit.deleteData(any())).thenAnswer((_) async {});
 
-      await tester.pumpWidget(_buildTestableWidget());
+      await tester.pumpWidget(buildTestableWidget());
       await tester.pumpAndSettle();
 
       final dismissible = find.byType(Dismissible).first;
@@ -127,7 +127,7 @@ void main() {
 
       when(() => mockHistoryCubit.resetState()).thenReturn(null);
 
-      await tester.pumpWidget(_buildTestableWidget());
+      await tester.pumpWidget(buildTestableWidget());
       await tester.pumpAndSettle();
 
       expect(find.text('Błąd połączenia z bazą'), findsOneWidget);
@@ -147,7 +147,7 @@ void main() {
       when(() => mockWciecieCubit.resetState()).thenReturn(null);
       when(() => mockHistoryCubit.closeDB()).thenAnswer((_) async {});
 
-      await tester.pumpWidget(_buildTestableWidget());
+      await tester.pumpWidget(buildTestableWidget());
       await tester.pumpAndSettle();
 
       await tester.tap(find.byIcon(Icons.arrow_back));
