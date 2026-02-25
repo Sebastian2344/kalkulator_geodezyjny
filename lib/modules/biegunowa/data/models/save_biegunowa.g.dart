@@ -54,7 +54,7 @@ const SaveBiegunowaSchema = CollectionSchema(
   getId: _saveBiegunowaGetId,
   getLinks: _saveBiegunowaGetLinks,
   attach: _saveBiegunowaAttach,
-  version: '3.1.0+1',
+  version: '3.3.0',
 );
 
 int _saveBiegunowaEstimateSize(

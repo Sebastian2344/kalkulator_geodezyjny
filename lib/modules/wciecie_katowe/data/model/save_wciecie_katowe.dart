@@ -1,4 +1,4 @@
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import 'wciece_katowe_model.dart';
 
 part 'save_wciecie_katowe.g.dart';

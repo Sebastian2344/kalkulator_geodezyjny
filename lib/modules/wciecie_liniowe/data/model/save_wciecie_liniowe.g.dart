@@ -41,7 +41,7 @@ const WciecieLinioweSaveSchema = CollectionSchema(
   getId: _wciecieLinioweSaveGetId,
   getLinks: _wciecieLinioweSaveGetLinks,
   attach: _wciecieLinioweSaveAttach,
-  version: '3.1.0+1',
+  version: '3.3.0',
 );
 
 int _wciecieLinioweSaveEstimateSize(

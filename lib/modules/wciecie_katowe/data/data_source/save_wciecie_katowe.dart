@@ -1,4 +1,4 @@
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import 'package:kalkulator_geodezyjny_new_version/modules/wciecie_katowe/data/model/save_wciecie_katowe.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:injectable/injectable.dart';

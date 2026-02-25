@@ -40,7 +40,7 @@ const WciecieKatoweSaveSchema = CollectionSchema(
   getId: _wciecieKatoweSaveGetId,
   getLinks: _wciecieKatoweSaveGetLinks,
   attach: _wciecieKatoweSaveAttach,
-  version: '3.1.0+1',
+  version: '3.3.0',
 );
 
 int _wciecieKatoweSaveEstimateSize(

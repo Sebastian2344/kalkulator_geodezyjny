@@ -1,4 +1,4 @@
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 part 'wciece_katowe_model.g.dart';
 @embedded
 class WciecieKatoweModel{
