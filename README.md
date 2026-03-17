@@ -1,5 +1,5 @@
 ## 📐 Kalkulator Geodezyjny
-Aplikacja stworzona we frameworku Flutter, wspomagająca pracę i obliczenia geodezyjne. Pomiary można zapisać w lokalnej bazie danych na urządzeniu.
+Aplikacja stworzona we frameworku Flutter, wspomagająca wypełnianie dzienników obliczeniowych. Wyniki wraz z danymi można zapisać w lokalnej bazie danych na urządzeniu.
 
 ### ⚙️ Moduły i Funkcje:
 * **Metoda ortogonalna**
