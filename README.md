@@ -1,2 +1,13 @@
-Kalkulator geodezyjny
-Został stworzona w framework flutter. Aplikacja posiada moduły:metoda ortogonalna, metoda biegunowa, wcięcia kątowego wstecz, wcięcia kątowego w przód. Za ich pomocą wykonuje się obliczenia do dzienników, które dodatkowo można zapisać w lokalnej bazie danych na urządzeniu. Wykorzystane biblioteki: flutter_bloc, bloc_test, izar,go_router, get_it, mocktail, equations.
+## 📐 Kalkulator Geodezyjny
+Aplikacja stworzona we frameworku Flutter, wspomagająca pracę i obliczenia geodezyjne. Pomiary można zapisać w lokalnej bazie danych na urządzeniu.
+
+### ⚙️ Moduły i Funkcje:
+* **Metoda ortogonalna**
+* **Metoda biegunowa**
+* **Wcięcia kątowe wstecz i w przód**
+* Obliczenia do dzienników oraz ich zapis i historia.
+
+### 🛠 Technologie i Biblioteki:
+`flutter_bloc`, `isar` (baza danych), `go_router`, `get_it` (Dependency Injection), `equations`.
+### 🧪 Testy:
+`bloc_test`, `mocktail`.
